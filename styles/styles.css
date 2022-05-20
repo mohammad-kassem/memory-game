@@ -16,6 +16,7 @@ body{
 .main-page-container h1{
     font-size: 30px;
     letter-spacing: 10px;
+    text-align: center;
 }
 
 .game-blocks-container{
@@ -32,15 +33,15 @@ body{
     justify-content: space-around;
     align-items: center;
     width: 60%;
-    height: 140px;
     margin: 0 5%;
 }
 
 
 .game-block{
-    width: 90px;
-    height: 90px;
+    width: 10vw;
+    height: 10vw;
     border: 5px solid black;
+    margin: 20px 0;
     border-radius: 15px;
 }
 
@@ -58,4 +59,18 @@ body{
 
 #blue{
     background-color: blue;
+}
+
+
+@media only screen and (max-width: 568px) {
+
+    .mobile{
+        flex-direction: column;
+    }
+    
+    .game-block{
+        
+        width: 90px;
+        height: 90px;
+    }
 }
