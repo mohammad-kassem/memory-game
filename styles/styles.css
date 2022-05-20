@@ -1,0 +1,37 @@
+body{
+    background-color: darkblue;
+}
+
+
+.main-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    margin: 5vh auto;
+    
+}
+
+.main-page-container h1{
+    font-size: 30px;
+    letter-spacing: 10px;
+}
+
+.game-blocks-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto 5vh auto;
+}
+
+.row-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    height: 140px;
+    margin: 0 5%;
+}
