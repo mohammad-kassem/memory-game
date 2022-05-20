@@ -35,3 +35,27 @@ body{
     height: 140px;
     margin: 0 5%;
 }
+
+
+.game-block{
+    width: 90px;
+    height: 90px;
+    border: 5px solid black;
+    border-radius: 15px;
+}
+
+#green{
+    background-color: limegreen;
+}
+
+#red {
+    background-color: red;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#blue{
+    background-color: blue;
+}
