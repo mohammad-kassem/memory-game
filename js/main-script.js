@@ -9,7 +9,9 @@ const pattern = [];
 var pattern_index = 0;
 
 
-// setting the background colors of the game blocks in JS so that they can be accessed and edited easier in JS"
+// setting the background colors of the game blocks and body tag in JS so that they can be accessed and edited easier in JS
+var game_body = document.body;
+game_body.style.backgroundColor = "rgb(1, 28, 56)";
 var game_block_green = document.getElementById("green");
 game_block_green.style.backgroundColor = "green";
 var game_block_red = document.getElementById("red");
@@ -49,25 +51,29 @@ function userClicked(game_block){
         audioPlay(game_block);
         changeStyle(game_block, "click");
         if (pattern_index === pattern.length){
-            pattern_index = 0;
             setTimeout(function() {
-            generateColor();
-            }, 600);
+                generateColor();
+                var status = document.getElementById("heading");
+                status.innerText = `Level ${pattern.length}`;
+                }, 600);
+            pattern_index = 0;
+            
     }
     }
+    else loseGame();
 }
 
-function audioPlay(game_block){
-    var audio_name = game_block.style.backgroundColor;
-    var audio = new Audio(`../assets/sounds/${audio_name}.mp3`);
+function audioPlay(block){
+    var audio_name = block.style.backgroundColor;
+    if (audio_name === "rgb(1, 28, 56)") var audio = new Audio("../assets/sounds/wrong.mp3");
+    else var audio = new Audio(`../assets/sounds/${audio_name}.mp3`);
     audio.play();
 
 }
 
 
 function changeStyle(game_block, mode){
-    var original_bg = game_block.style.backgroundColor;
-    console.log(original_bg);
+    var original_background = game_block.style.backgroundColor;
     if (mode === "click"){
         game_block.style = "background-color: grey; box-shadow: 0 0 10px white;";
     }
@@ -77,7 +83,7 @@ function changeStyle(game_block, mode){
     }
     setTimeout(function(){
         game_block.style = "";
-        game_block.style.backgroundColor = original_bg;
+        game_block.style.backgroundColor = original_background;
     }, 150);
     
 }
@@ -89,5 +95,18 @@ function generateColor(){
     audioPlay(chosen_game_block);
     changeStyle(chosen_game_block, " ");
     return chosen_color;
+
+}
+
+function loseGame(){
+    var game_body = document.body; 
+    var original_background = game_body.style.backgroundColor; 
+    audioPlay(game_body);
+    document.body.style.backgroundColor = "red";
+    setTimeout (function(){
+        game_body.style.backgroundColor = original_background;
+    }, 180);
+    var status = document.getElementById("heading");
+    status.innerText = "Game Over, Press Any key To Restart";
 
 }
