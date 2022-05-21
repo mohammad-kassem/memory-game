@@ -1,3 +1,8 @@
+// variable definition
+const color_options = ["green", "red", "yellow", "blue"];
+const pattern = [];
+
+
 // setting the background colors of the game blocks in JS so that they can be accessed and edited easier in JS"
 var game_block_green = document.getElementById("green");
 game_block_green.style.backgroundColor = "green";
@@ -27,7 +32,7 @@ game_block_blue.addEventListener("click", function(){
 function userClicked(game_block){
     if (game_block.style.backgroundColor){
         audioPlay(game_block);
-        changeStyle(game_block);
+        changeStyle(game_block, "active");
     }
 
 }
@@ -40,10 +45,15 @@ function audioPlay(game_block){
 }
 
 
-function changeStyle(game_block){
+function changeStyle(game_block, mode){
     var original_bg = game_block.style.backgroundColor;
     console.log(original_bg);
-    game_block.style = "background-color: grey; box-shadow: 0 0 10px white;";
+    if (mode === "active"){
+        game_block.style = "background-color: grey; box-shadow: 0 0 10px white;";
+    }
+    else {
+        game_block.style = "opacity: 0";
+    }
     console.log(game_block.style);
     setTimeout(function(){
         game_block.style = "";
@@ -51,3 +61,14 @@ function changeStyle(game_block){
     }, 150);
     
 }
+
+function generateColor(){
+    var color_chosen = color_options[Math.floor(Math.random() * color_options.length)];
+    pattern.push(color_chosen);
+    var chosen_game_block = document.getElementById(color_chosen);
+    audioPlay(chosen_game_block);
+    changeStyle(chosen_game_block, " ");
+
+}
+
+chooseGameBlock();

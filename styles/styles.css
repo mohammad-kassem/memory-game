@@ -1,5 +1,5 @@
 body{
-    background-color: darkblue;
+    background-color: #011c38;
 }
 
 
@@ -17,6 +17,7 @@ body{
     font-size: 30px;
     letter-spacing: 10px;
     text-align: center;
+    color: #f7efb4;
 }
 
 .game-blocks-container{
