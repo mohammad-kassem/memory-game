@@ -1,3 +1,4 @@
+
 // game reset and start event
 var start = document.body;
 start.addEventListener("keypress", playGame);
@@ -43,11 +44,17 @@ function playGame(){
 
 
 function userClicked(game_block){
-    if (game_block.style.backgroundColor){
+    if (game_block.style.backgroundColor === pattern[pattern_index]){
+        pattern_index += 1;
         audioPlay(game_block);
-        changeStyle(game_block, "active");
+        changeStyle(game_block, "click");
+        if (pattern_index === pattern.length){
+            pattern_index = 0;
+            setTimeout(function() {
+            generateColor();
+            }, 600);
     }
-
+    }
 }
 
 function audioPlay(game_block){
@@ -74,7 +81,6 @@ function changeStyle(game_block, mode){
     }, 150);
     
 }
-
 
 function generateColor(){
     var chosen_color = color_options[Math.floor(Math.random() * color_options.length)];
