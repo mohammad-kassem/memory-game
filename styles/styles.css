@@ -45,22 +45,6 @@ body{
     border-radius: 15px;
 }
 
-#green{
-    background-color: limegreen;
-}
-
-#red {
-    background-color: red;
-}
-
-#yellow{
-    background-color: yellow;
-}
-
-#blue{
-    background-color: blue;
-}
-
 
 @media only screen and (max-width: 568px) {
 
