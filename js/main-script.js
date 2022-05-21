@@ -25,6 +25,13 @@ game_block_blue.addEventListener("click", function(){
 
 
 function userClicked(game_block){
-    console.log("working")
+    if (game_block.style.backgroundColor){
+        audioPlay(game_block);
+    }
+}
 
+function audioPlay(game_block){
+    var audio_name = game_block.style.backgroundColor;
+    var audio = new Audio(`../assets/sounds/${audio_name}.mp3`);
+    audio.play();
 }
