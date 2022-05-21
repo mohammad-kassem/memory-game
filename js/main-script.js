@@ -27,11 +27,27 @@ game_block_blue.addEventListener("click", function(){
 function userClicked(game_block){
     if (game_block.style.backgroundColor){
         audioPlay(game_block);
+        changeStyle(game_block);
     }
+
 }
 
 function audioPlay(game_block){
     var audio_name = game_block.style.backgroundColor;
     var audio = new Audio(`../assets/sounds/${audio_name}.mp3`);
     audio.play();
+
+}
+
+
+function changeStyle(game_block){
+    var original_bg = game_block.style.backgroundColor;
+    console.log(original_bg);
+    game_block.style = "background-color: grey; box-shadow: 0 0 10px white;";
+    console.log(game_block.style);
+    setTimeout(function(){
+        game_block.style = "";
+        game_block.style.backgroundColor = original_bg;
+    }, 150);
+    
 }
