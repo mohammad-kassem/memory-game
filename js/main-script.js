@@ -1,13 +1,8 @@
-// game reset and start event
-var start = document.body;
-function startGame(){
-    start.onkeydown = playGame;
-}
-
 // variable definition
 const color_options = ["green", "red", "yellow", "blue"];
 var pattern = [];
 var pattern_index = 0;
+var restarted = true;
 
 
 // setting the background colors of the game blocks and body tag in JS so that they can be accessed and edited easier in JS
@@ -40,6 +35,12 @@ function turnOffEventListners(){
 
 }
 
+// game reset and start event
+var start = document.body;
+function startGame(){
+    start.onkeydown = playGame;
+}
+
 
 startGame();
 
@@ -48,29 +49,29 @@ function playGame(){
     start.onkeydown = {};
     generateColor();
     turnOnEventListners();
+    
 
 }
 
 
 // the click event callback function declaration
 function userClicked(game_block){
-    
     if (game_block.style.backgroundColor === pattern[pattern_index]){
+        restarted = false;
         turnOffEventListners();
-        setTimeout(()=>turnOnEventListners(), 600);
+        setTimeout(()=>turnOnEventListners(), 500);
         clearTimeout;
         pattern_index += 1;
         var block_color = game_block.style.backgroundColor;
         audioPlay(block_color);
         changeStyle(block_color, "click");
-        if (pattern_index === pattern.length){    
+        if (pattern_index === pattern.length){ 
+            can_click = false;   
             generateColor();
             pattern_index = 0;
 
-        
         }
     }
-
     else loseGame();
 }
 
@@ -83,15 +84,15 @@ function audioPlay(block_color){
 }
 
 // changes the style of the game-block to highlight when clicked or if it's been added to the pattern
+// this function has two modes; click when a game-block is clicked and the other when the block is chosen to be inseted into the pattern
 function changeStyle(block_color, mode){
     var game_block = document.getElementById(block_color);
     if (mode === "click"){
         game_block.style = "background-color: grey; box-shadow: 0 0 10px white;";
-    }
-    else {
-        game_block.style = "opacity: 0";
 
     }
+    else game_block.style = "opacity: 0";
+
     setTimeout(() =>{
         game_block.style = "";
         game_block.style.backgroundColor = block_color;
@@ -100,19 +101,28 @@ function changeStyle(block_color, mode){
     
 }
 
+
 // generates the next color in the pattern randomly and psuhes it into the pattern array while calling changeStyle to highlight it
+// the restart variable controls the delay of this function
 function generateColor(){
     var chosen_color = color_options[Math.floor(Math.random() * color_options.length)];
     pattern.push(chosen_color);
+    if (restarted){
+        audioPlay(chosen_color);
+        changeStyle(chosen_color, " ");
+
+    }
+    else{
     setTimeout(() => {
         audioPlay(chosen_color);
         changeStyle(chosen_color, " ");
 
-    }, 600); 
+    }, 600);} 
     var status = document.getElementById("heading");
     status.innerText = `Level ${pattern.length}`;
 
 }
+
 
 // handles changing the background and then back and playing the sound when the user loses (enters the pattern wrong)
 function loseGame(){
@@ -124,9 +134,21 @@ function loseGame(){
     pattern_index = 0;
     turnOffEventListners();
     document.body.style.backgroundColor = "red";
+    changeOpacityOnLosing(0.7);
     setTimeout (() => {
         document.body.style.backgroundColor = original_background;
+        changeOpacityOnLosing(1);
     }, 200);
+    clearTimeout;
+    restarted = true;
     startGame();
 
+}
+
+
+function changeOpacityOnLosing(opacity_value){
+    game_block_green.style.opacity = opacity_value;
+    game_block_red.style.opacity = opacity_value;
+    game_block_yellow.style.opacity = opacity_value;
+    game_block_blue.style.opacity = opacity_value;
 }
