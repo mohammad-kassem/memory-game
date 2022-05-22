@@ -24,7 +24,7 @@ game_block_blue.style.backgroundColor = "blue";
 
 
 function turnOnEventListners(){
-    game_block_green.onclick = (event) => {userClicked(game_block_green)};
+    game_block_green.onclick = () => {userClicked(game_block_green)};
     game_block_red.onclick = () => {userClicked(game_block_red)};
     game_block_yellow.onclick = () => {userClicked(game_block_yellow)};
     game_block_blue.onclick = () => {userClicked(game_block_blue)};
@@ -54,7 +54,11 @@ function playGame(){
 
 // the click event callback function declaration
 function userClicked(game_block){
+    
     if (game_block.style.backgroundColor === pattern[pattern_index]){
+        turnOffEventListners();
+        setTimeout(()=>turnOnEventListners(), 600);
+        clearTimeout;
         pattern_index += 1;
         var block_color = game_block.style.backgroundColor;
         audioPlay(block_color);
@@ -68,7 +72,6 @@ function userClicked(game_block){
     }
 
     else loseGame();
-
 }
 
 
