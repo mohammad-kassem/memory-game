@@ -1,11 +1,12 @@
-
 // game reset and start event
 var start = document.body;
-start.addEventListener("keypress", playGame);
+start.addEventListener("keydown", playGame);
+console.log("hello");
+
 
 // variable definition
 const color_options = ["green", "red", "yellow", "blue"];
-const pattern = [];
+var pattern = [];
 var pattern_index = 0;
 
 
@@ -24,25 +25,18 @@ game_block_blue.style.backgroundColor = "blue";
 
 //main function
 function playGame(){
-    start.removeEventListener("keypress", playGame);
-    
-    chosen_color = generateColor();
-    //adding the event listners on the event of being clicked for the game block which all use the same callback function userClicked
-    game_block_green.addEventListener("click", function(){
-        userClicked(game_block_green);
-    }, false);
-    game_block_red.addEventListener("click", function(){
-        userClicked(game_block_red);
-    }, false);
-    game_block_yellow.addEventListener("click", function(){
-        userClicked(game_block_yellow);
-    }, false);
-    game_block_blue.addEventListener("click", function(){
-        userClicked(game_block_blue);
-    }, false);
+    pattern =[];
+    pattern_index = 0;
+    setTimeout ( ()=>{
+    generateColor();}, 200);
 
+    game_block_green.onclick = () => {userClicked(game_block_green)};
+    game_block_red.onclick = () => {userClicked(game_block_red)};
+    game_block_yellow.onclick = () => {userClicked(game_block_yellow)};
+    game_block_blue.onclick = () => {userClicked(game_block_blue)};
 
 }
+
 
 
 function userClicked(game_block){
@@ -53,20 +47,18 @@ function userClicked(game_block){
         if (pattern_index === pattern.length){
             setTimeout(function() {
                 generateColor();
-                var status = document.getElementById("heading");
-                status.innerText = `Level ${pattern.length}`;
                 }, 600);
             pattern_index = 0;
-            
     }
     }
-    else loseGame();
+    else {loseGame();
+        console.log("error");}
 }
 
 function audioPlay(block){
     var audio_name = block.style.backgroundColor;
-    if (audio_name === "rgb(1, 28, 56)") var audio = new Audio("../assets/sounds/wrong.mp3");
-    else var audio = new Audio(`../assets/sounds/${audio_name}.mp3`);
+    if (audio_name === "rgb(1, 28, 56)") var audio = new Audio("./assets/sounds/wrong.mp3");
+    else var audio = new Audio(`./assets/sounds/${audio_name}.mp3`);
     audio.play();
 
 }
@@ -91,22 +83,31 @@ function changeStyle(game_block, mode){
 function generateColor(){
     var chosen_color = color_options[Math.floor(Math.random() * color_options.length)];
     pattern.push(chosen_color);
+    console.log(pattern);
     var chosen_game_block = document.getElementById(chosen_color);
     audioPlay(chosen_game_block);
     changeStyle(chosen_game_block, " ");
-    return chosen_color;
+    var status = document.getElementById("heading");
+    status.innerText = `Level ${pattern.length}`;
 
 }
 
 function loseGame(){
-    var game_body = document.body; 
-    var original_background = game_body.style.backgroundColor; 
+    var original_background = document.body.style.backgroundColor; 
     audioPlay(game_body);
     document.body.style.backgroundColor = "red";
-    setTimeout (function(){
-        game_body.style.backgroundColor = original_background;
-    }, 180);
+    setTimeout (() => {
+        document.body.style.backgroundColor = original_background;
+        console.log("hello");
+    }, 200);
     var status = document.getElementById("heading");
     status.innerText = "Game Over, Press Any key To Restart";
+    pattern =[];
+    pattern_index = 0;
+    game_block_green.onclick = () => {};
+    game_block_red.onclick = () => {};
+    game_block_yellow.onclick = () => {};
+    game_block_blue.onclick = () => {};
+
 
 }
