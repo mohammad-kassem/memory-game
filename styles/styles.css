@@ -3,6 +3,10 @@
 *{
     font-family: 'Press Start 2P', cursive;
     margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    list-style: none;
 }
 
 .main-page-container{
@@ -41,11 +45,11 @@
 
 
 .game-block{
-    width: 12vw;
-    height: 12vw;
+    width: 11vw;
+    height: 11vw;
     border: 10px solid black;
-    margin: 20px 0;
-    border-radius: 40px;
+    margin: 18px 0;
+    border-radius: 35px;
 }
 
 
