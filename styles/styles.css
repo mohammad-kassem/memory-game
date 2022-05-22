@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*{
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+}
 
 .main-page-container{
     display: flex;
@@ -5,12 +11,12 @@
     justify-content: center;
     align-items: center;
     width: 85%;
-    margin: 5vh auto;
+    margin: 12vh auto 0 auto;
     
 }
 
 .main-page-container h1{
-    font-size: 30px;
+    font-size: 35px;
     letter-spacing: 10px;
     text-align: center;
     color: #f7efb4;
@@ -22,12 +28,12 @@
     justify-content: center;
     align-items: center;
     width: 70%;
-    margin: 0 auto 5vh auto;
+    margin: 10vh auto 0 auto;
 }
 
 .row-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     width: 60%;
     margin: 0 5%;
@@ -35,15 +41,15 @@
 
 
 .game-block{
-    width: 10vw;
-    height: 10vw;
-    border: 5px solid black;
+    width: 12vw;
+    height: 12vw;
+    border: 10px solid black;
     margin: 20px 0;
-    border-radius: 15px;
+    border-radius: 40px;
 }
 
 
-@media only screen and (max-width: 568px) {
+@media screen and (max-width: 768px) {
 
     .mobile{
         flex-direction: column;
@@ -51,7 +57,7 @@
     
     .game-block{
         
-        width: 90px;
-        height: 90px;
+        width: 160px;
+        height: 160px;
     }
 }
